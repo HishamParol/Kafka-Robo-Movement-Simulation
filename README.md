@@ -21,13 +21,8 @@ This project demonstrates a real-time simulation of a robot navigating through a
 ---
 
 ## Project Structure
-
+---bash
 robot-simulation/ ├── robot_position/ │ ├── init.py # (optional for making this directory a package) │ ├── producer.py # Kafka producer to simulate robot movement │ └── requirements.txt # Python dependencies for producer ├── flask_app/ │ ├── templates/ │ │ └── index.html # Frontend template for the Flask app │ ├── static/ │ │ ├── car.png # Robot car icon │ │ └── styles.css # Custom styles for the Flask app │ ├── app.py # Flask app to consume Kafka data and serve it │ └── requirements.txt # Python dependencies for Flask app ├── .gitignore # Ignored files (e.g., virtual environment, logs, etc.) ├── README.md # Documentation for the project └── LICENSE # Project license
-
-Copy
-Edit
-
-
 ---
 
 ## Setup and Installation
@@ -45,30 +40,26 @@ Edit
 ```bash
 git clone https://github.com/<your-username>/robot-simulation.git
 cd robot-simulation
-
-Step 2: Set Up Kafka Producer (Robot Movement Simulation)
+---
+###Step 2: Set Up Kafka Producer (Robot Movement Simulation)
 Navigate to the robot_position/ directory:
 
-bash
-Copy
-Edit
+---bash
 cd robot_position
 Create a virtual environment and install dependencies:
+---
+---bash
 
-bash
-Copy
-Edit
 python3 -m venv venv
 source venv/bin/activate    # On Windows: venv\\Scripts\\activate
 pip install -r requirements.txt
 Update the Kafka broker address in producer.py:
-
+---
 python
-Copy
-Edit
+---bash
 KAFKA_BROKER = 'localhost:9092'
 Run the Kafka producer:
-
+---
 bash
 Copy
 Edit
