@@ -23,21 +23,17 @@ This project demonstrates a real-time simulation of a robot navigating through a
 ## Project Structure
 ```bash
 robot-simulation/
-├── robot_position/ │
+
 ├── init.py # (optional for making this directory a package) │
-├── producer.py # Kafka producer to simulate robot movement│
- └── requirements.txt # Python dependencies for producer
-├── flask_app/ │
+├── requirements.txt # Python dependencies for producer │
+├── robot_position.py # Kafka producer to simulate robot movement│
+├── app.py # Flask app to consume Kafka data and serve it │
 ├── templates/ │
-│ └── index.html # Frontend template for the Flask app │
-├── static/ │ │
-├── car.png # Robot car icon │
-│ └── styles.css # Custom styles for the Flask app │
-├── app.py # Flask app to consume Kafka data and serve it
-│ └── requirements.txt # Python dependencies for Flask app
-├── .gitignore # Ignored files (e.g., virtual environment, logs, etc.)
+    └── index.html # Frontend template for the Flask app │
+├── static/ │ 
+    └── car.png # Robot car icon │
 ├── README.md # Documentation for the project
- └── LICENSE # Project license
+├── LICENSE # Project license
 ```
 
 ## Setup and Installation
