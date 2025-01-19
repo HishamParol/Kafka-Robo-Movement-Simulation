@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Car Simulation</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Arial", sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            justify-content: center;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2.5em;
+            color: #4CAF50;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        #main-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        #canvas-container {
+            position: relative;
+        }
+
+        canvas {
+            border: 4px solid #FF5722; /* Canvas border color */
+            background-color: #f0f0f0; /* Light background */
+        }
+
+        #data-container {
+            background: #ffffff;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #data-container h2 {
+            margin: 0 0 15px;
+            color: #4CAF50;
+            font-size: 1.8em;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        #footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>Robot Car Simulation</h1>
+    <div id="main-container">
+        <div id="canvas-container">
+            <canvas id="simulationCanvas" width="800" height="600"></canvas>
+        </div>
+        <div id="data-container">
+            <h2>Last 10 Positions</h2>
+            <ul id="data-list"></ul>
+        </div>
+    </div>
+    <div id="footer">Simulation by Robot Car Dashboard</div>
+
+    <script>
+        const canvas = document.getElementById("simulationCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Obstacles from the backend
+        const obstacles = {{ obstacles | tojson }};
+
+        // Draw obstacles
+        function drawObstacles() {
+            ctx.fillStyle = "#FF6347"; // Obstacle color (Tomato)
+            for (const obstacle of obstacles) {
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            }
+        }
+
+        // Car icon from the local static folder
+        const carIcon = new Image();
+        carIcon.src = "/static/car.png"; // Car icon from the static folder
+        carIcon.width = 40; // Adjust size of the car icon
+        carIcon.height = 40; // Adjust size of the car icon
+
+        let pathPoints = []; // Store all positions for full path
+
+        // Stream robot data
+        const eventSource = new EventSource("/data_stream");
+        eventSource.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+
+            // Ensure robot stays within the boundaries of the canvas
+            if (data.x < 0) data.x = 0;
+            if (data.x > canvas.width) data.x = canvas.width;
+            if (data.y < 0) data.y = 0;
+            if (data.y > canvas.height) data.y = canvas.height;
+
+            // Add the current position to the path
+            pathPoints.push({ x: data.x, y: data.y });
+
+            // Display only the last 10 positions in the sidebar
+            const dataList = document.getElementById("data-list");
+            const last10Points = pathPoints.slice(-10); // Get the last 10 points
+            dataList.innerHTML = last10Points
+                .map((point) => `<li>x: ${point.x.toFixed(2)}, y: ${point.y.toFixed(2)}</li>`)
+                .join("");
+
+            // Clear and redraw the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawObstacles();
+
+            // Draw the full path from the start
+            ctx.strokeStyle = "#2196F3"; // Path color (Blue)
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            pathPoints.forEach((point, index) => {
+                if (index === 0) {
+                    ctx.moveTo(point.x, point.y);
+                } else {
+                    ctx.lineTo(point.x, point.y);
+                }
+            });
+            ctx.stroke();
+
+            // Draw the car icon at the current position
+            ctx.drawImage(carIcon, data.x - 20, data.y - 20, 40, 40); // Adjust the icon's position
+        };
+    </script>
+</body>
+</html>
