@@ -22,7 +22,14 @@ This project demonstrates a real-time simulation of a robot navigating through a
 
 ## Project Structure
 
-robot-simulation/ ├── robot_position/ # Kafka producer code │ ├── producer.py # Simulates robot movement and streams to Kafka │ └── requirements.txt # Dependencies: confluent_kafka, etc. ├── flask_app/ # Flask application code │ ├── templates/ │ │ └── index.html # Frontend template for real-time dashboard │ ├── static/ │ │ ├── car.png # Icon representing the robot car │ │ └── styles.css # Styles for the Flask app │ ├── app.py # Flask app consuming Kafka data │ └── requirements.txt # Dependencies: flask, confluent_kafka, etc. └── README.md # Project documentation
+robot-simulation/ ├── robot_position/ 
+# Kafka producer code │ ├── producer.py 
+# Simulates robot movement and streams to Kafka │ └── requirements.txt # Dependencies: confluent_kafka, etc. ├── flask_app/ 
+# Flask application code │ ├── templates/ │ │ └── index.html # Frontend template for real-time dashboard │ ├── static/ │ │ ├── car.png 
+# Icon representing the robot car │ │ └── styles.css # Styles for the Flask app │ ├── app.py 
+# Flask app consuming Kafka data │ └── requirements.txt 
+# Dependencies: flask, confluent_kafka, etc. └── README.md 
+# Project documentation
 
 
 ---
