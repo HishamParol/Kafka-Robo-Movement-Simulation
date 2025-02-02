@@ -16,6 +16,7 @@ This project demonstrates a real-time simulation of a robot navigating through a
 
 - **Interactive Dashboard**:
   - Displays the robot's path, obstacles, and real-time position.
+  - Obstacles box are drawn
   - Robot represented with a car icon (`car.png`).
 
 ---
@@ -25,15 +26,15 @@ This project demonstrates a real-time simulation of a robot navigating through a
 robot-simulation/
 
 ├── init.py # (optional for making this directory a package) │
-├── requirements.txt # Python dependencies for producer │
-├── robot_position.py # Kafka producer to simulate robot movement│
-├── app.py # Flask app to consume Kafka data and serve it │
+├── requirements.txt│
+├── robot_position.py │
+├── app.py  │
 ├── templates/ │
-    └── index.html # Frontend template for the Flask app │
+    └── index.html │
 ├── static/ │ 
-    └── car.png # Robot car icon │
-├── README.md # Documentation for the project
-├── LICENSE # Project license
+    └── car.png  │
+├── README.md 
+
 ```
 
 ## Setup and Installation
