@@ -1,6 +1,6 @@
 # Robot Movement Simulation with Kafka and Flask
 
-This project demonstrates a real-time simulation of a robot navigating through a 2D space with obstacles. It uses Kafka to stream the robot's coordinates as it moves, and a Flask web application visualizes the robot's position and its movement history.
+This project showcases a real-time simulation of a robot navigating through a 2D space filled with obstacles. The system is designed to demonstrate continuous tracking and visualization of the robot's movement while handling real-time data streaming. It uses Kafka to stream the robot's coordinates as it moves, and a Flask web application visualizes the robot's position and its movement history.
 
 ---
 
@@ -37,6 +37,26 @@ robot-simulation/
 
 ```
 
+
+## Kafka for Real-Time Streaming
+
+- Kafka acts as the central data pipeline, allowing the robot's position updates to be streamed in real time.
+- A producer script generates and sends the robot's coordinates to a Kafka topic.
+- A consumer (Flask app) reads these updates and processes them for visualization.
+  
+## Flask Web Application for Visualization
+
+- The Flask app continuously consumes data from Kafka.
+- It renders a visual board that displays the robot's current position, movement path, and obstacles.
+- The robot is represented by a car icon, and the UI updates in real time.
+  
+## Robot Movement and Collision Handling
+
+- The robot moves within a predefined 2D grid or canvas.
+- When it collides with a boundary or an obstacle, it detects the collision and changes direction accordingly.
+- This behavior mimics an autonomous navigation system with basic obstacle avoidance.
+
+
 ## Setup and Installation
 
 ### Prerequisites
@@ -51,10 +71,11 @@ robot-simulation/
 ### Step 2: Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/robot-simulation.git
-cd robot-simulation
+git gh repo clone HishamParol/Kafka-Robo-Movement-Simulation
+cd Kafka-Robo-Movement-Simulation
 ```
 ### Step 3: Setup Kafka on the Local Computer
+- Once you download the Kafka in your local computer
 - Go to kafka folder ~/kafka_2.13-3.9.0
 - Go to Server properties \config\server
 #### Configure Kafka Broker
@@ -82,24 +103,24 @@ zookeeper.connect=localhost:9092
 
 ### Step 4: Setup the Environment
 - Open a new Terminal
-- Navigate to the robot_position/ directory:
+- Navigate to the Project directory:
 - Create a virtual environment and install dependencies:
 ```bash
-cd robot_position
+cd 'Project Folder'
 python3 -m venv venv
 source venv/bin/activate    # On Windows: venv\\Scripts\\activate
 pip install -r requirements.txt
 ```
 ### Step 5: Run the Robot Simulation Producer code
-- Set the KAFKA_BROKER in the producer code
+- Set the KAFKA_BROKER in the producer code (robot_position.py)
 ```bash
 KAFKA_BROKER = 'localhost:9092'
 ```
 
-- Run producer.py code
+- Run the Producer code
   
 ```bash
-python producer.py
+python robot_position.py
 ```
 ### Step 5: Run the Main Flask App
 
@@ -113,3 +134,8 @@ python app.py
 - If a robot collides with a boundary or obstacle, it will change direction
 - Open your browser and navigate to the port provided
 
+## Key Features
+- ✔ Real-Time Data Processing → Kafka enables fast and efficient streaming of movement data.
+- ✔ Dynamic Visualization → Flask updates the UI as new data arrives.
+- ✔ Obstacle Handling → The robot intelligently detects and reacts to collisions.
+- ✔ Scalability → Kafka allows multiple robots to be tracked simultaneously.
