@@ -69,7 +69,7 @@ robot-simulation/
 ---
 
 ### Step 1: Install Kafka
-- Refer to this document for downloading Kafka locally [Installation guide](ref/Kafka Installation.pdf)
+- Refer to this document for downloading Kafka locally [ref/Kafka Installation.pdf](ref/Kafka Installation.pdf)
 
 ### Step 2: Clone the Repository
 
