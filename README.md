@@ -45,7 +45,7 @@ robot-simulation/
 - **Kafka Broker** (Running locally or in the cloud)
 - **Confluent Kafka Python Library** (`confluent-kafka`)
 
-## Step 1: Install Kafka
+### Step 1: Install Kafka
 - Refer to this document for downloading Kafka locally
 
 ### Step 2: Clone the Repository
@@ -56,8 +56,8 @@ cd robot-simulation
 ```
 ### Step 3: Setup Kafka on the Local Computer
 - Go to kafka folder ~/kafka_2.13-3.9.0
-- - \config\server
-## Configure Kafka Broker
+- Go to Server properties \config\server
+#### Configure Kafka Broker
 ```bash
 broker.id=1
 log.dirs=/var/lib/kafka/data
@@ -66,81 +66,50 @@ log.retention.hours=168
 default.replication.factor=2
 zookeeper.connect=localhost:9092
 ```
+#### Start Kafka Broker and Zookeeper
+- Open a new Terminal
+- Start the Zookeeper
+  
+```bash
+  cd ~\kafka_2.13-3.9.0 (kafka folder)
+ .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+```
+- Open another Terminal
+- Start the Kafka Broker
+```bash
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+```
 
-
-
-###Step 2: Set Up Kafka Producer (Robot Movement Simulation)
-Navigate to the robot_position/ directory:
-
+### Step 4: Setup the Environment
+- Open a new Terminal
+- Navigate to the robot_position/ directory:
+- Create a virtual environment and install dependencies:
 ```bash
 cd robot_position
-Create a virtual environment and install dependencies:
-```
-
-```bash
 python3 -m venv venv
 source venv/bin/activate    # On Windows: venv\\Scripts\\activate
 pip install -r requirements.txt
-Update the Kafka broker address in producer.py:
 ```
-
-python
+### Step 5: Run the Robot Simulation Producer code
+- Set the KAFKA_BROKER in the producer code
 ```bash
 KAFKA_BROKER = 'localhost:9092'
-Run the Kafka producer:
 ```
 
+- Run producer.py code
+  
 ```bash
 python producer.py
-Step 3: Set Up Flask Application (Visualization)
-Navigate to the flask_app/ directory:
 ```
+### Step 5: Run the Main Flask App
 
-```bash
-cd flask_app
-Create a virtual environment and install dependencies:
-```
-
-```bash
-python3 -m venv venv
-source venv/bin/activate    # On Windows: venv\\Scripts\\activate
-pip install -r requirements.txt
-Update the Kafka broker address in app.py:
-```
-
-```bash
-KAFKA_BROKER = 'localhost:9092'
-Run the Flask app:
-```
-
+- In the new Terminal
 ```bash
 python app.py
-Open your browser and navigate to:
 ```
-
-arduino
-```bash
-http://localhost:5000
-```
-How It Works
-Producer:
-
-Simulates a robot navigating through a 2D space.
-Streams the robot's x, y coordinates to Kafka.
-Consumer (Flask App):
-
-Consumes the robot's position data from Kafka in real-time.
-Renders the data on a 2D canvas.
-Visualization:
-
-Robot's position is represented by a car icon (car.png).
-Obstacles are visualized on the canvas.
-Full path of the robot's movement is preserved.
-Example Visualization
-Feature	Example Screenshot
-Robot Movement	
-Real-Time Data	Shows last 10 positions in a side panel.
-Obstacle Handling	Robot navigates around obstacles.
-
-
+- The Flask app will retrieve data from the Kafka topics produced by the producer code.
+- The Flask app will display a visual board that shows the real-time movement of the robots.
+- The robot is represented by a car icon.
+- If a robot collides with a boundary or obstacle, it will change direction
+- Open your browser and navigate to the port provided
 
