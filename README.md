@@ -56,6 +56,7 @@ robot-simulation/
 - When it collides with a boundary or an obstacle, it detects the collision and changes direction accordingly.
 - This behavior mimics an autonomous navigation system with basic obstacle avoidance.
 
+---
 
 ## Setup and Installation
 
@@ -64,6 +65,8 @@ robot-simulation/
 - **Python** (>= 3.8)
 - **Kafka Broker** (Running locally or in the cloud)
 - **Confluent Kafka Python Library** (`confluent-kafka`)
+
+---
 
 ### Step 1: Install Kafka
 - Refer to this document for downloading Kafka locally
@@ -133,6 +136,8 @@ python app.py
 - The robot is represented by a car icon.
 - If a robot collides with a boundary or obstacle, it will change direction
 - Open your browser and navigate to the port provided
+
+---
 
 ## Key Features
 - ✔ Real-Time Data Processing → Kafka enables fast and efficient streaming of movement data.
