@@ -29,9 +29,9 @@ robot-simulation/
 ├── requirements.txt│
 ├── robot_position.py │
 ├── app.py  │
-├── templates/ │
+├── templates/ 
     └── index.html │
-├── static/ │ 
+├── static/  
     └── car.png  │
 ├── README.md 
 
@@ -45,14 +45,30 @@ robot-simulation/
 - **Kafka Broker** (Running locally or in the cloud)
 - **Confluent Kafka Python Library** (`confluent-kafka`)
 
----
+## Step 1: Install Kafka
+- Refer to this document for downloading Kafka locally
 
-### Step 1: Clone the Repository
+### Step 2: Clone the Repository
 
 ```bash
 git clone https://github.com/<your-username>/robot-simulation.git
 cd robot-simulation
 ```
+### Step 3: Setup Kafka on the Local Computer
+- Go to kafka folder ~/kafka_2.13-3.9.0
+- - \config\server
+## Configure Kafka Broker
+```bash
+broker.id=1
+log.dirs=/var/lib/kafka/data
+num.partitions=3
+log.retention.hours=168
+default.replication.factor=2
+zookeeper.connect=localhost:9092
+```
+
+
+
 ###Step 2: Set Up Kafka Producer (Robot Movement Simulation)
 Navigate to the robot_position/ directory:
 
