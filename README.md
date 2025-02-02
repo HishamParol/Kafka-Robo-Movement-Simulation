@@ -69,7 +69,7 @@ robot-simulation/
 ---
 
 ### Step 1: Install Kafka
-- Refer to this document for downloading Kafka locally [here](https://github.com/HishamParol/Kafka-Robo-Movement-Simulation/ref/Kafka Installation.pdf)
+- Refer to this document for downloading Kafka locally - ref/Kafka Installation.pdf
 
 
 ### Step 2: Clone the Repository
